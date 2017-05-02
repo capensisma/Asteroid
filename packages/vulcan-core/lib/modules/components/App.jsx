@@ -2,12 +2,12 @@ import { Components, registerComponent, getSetting, Strings } from 'meteor/vulca
 import React, { PropTypes, Component } from 'react';
 import { IntlProvider, intlShape} from 'react-intl';
 import withCurrentUser from '../containers/withCurrentUser.js';
-
+import cookie from 'react-cookie';
 
 class App extends Component {
 
   getLocale() {
-    return getSetting("locale", "en");
+    return !!cookie.load('locale') ? cookie.load('locale'): Telescope.settings.get("locale", "en");
   }
 
   getChildContext() {
